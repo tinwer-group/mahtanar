@@ -16,6 +16,11 @@ esp32:
   framework:
     type: arduino
 
+# Load the mitsubishi_uart component from this repo for now (hopefully eventually it will merged in ESPHome)
+external_components:
+  - source: github://muart-group/esphome@dev
+    components: [ mitsubishi_uart ]
+
 # This should point to the public location of this yaml file.
 dashboard_import:
   package_import_url: github://tinwer-group/mahtanar/esphome-configs/mahtanar-wifi-default.yaml@1.0-release
