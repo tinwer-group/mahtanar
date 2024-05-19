@@ -7,10 +7,19 @@ esphome:
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
 
+  project:
+    name: "Tinwer MahtanarM"
+    version: "1.0"
+
 esp32:
   board: esp32-c3-devkitm-1
   framework:
     type: arduino
+
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: github://tinwer-group/mahtanar/esphome-configs/mahtanar-wifi-default.yaml@1.0-release
+  import_full_config: false # or true
 
 logger:
   # Serial logging disabled to support communication with thermostat.  Can be reenabled by disabling tstat_uart below.
@@ -21,15 +30,33 @@ api:
 
 ota:
 
+ # Enable WiFi and captive portal for provisioning
 wifi:
-  # Enable captive portal for provisioning
   ap:
     ssid: "mUART Setup"
     password: "mahtanar"
 
 captive_portal:
 
-# Sets up Bluetooth LE (Only on ESP32) to allow the user
-# to provision wifi credentials to the device.
-esp32_improv:
-  authorizer: none
+# Define mitsubishi_uart component
+mitsubishi_uart:
+  heatpump_uart: hp_uart
+  thermostat_uart: tstat_uart # This and the uart component below can be removed if no thermostat connected
+  update_interval: 6s # This should be a relatively safe default, but can be adjusted if desired
+
+# Define UARTs connected to heat pump and thermostat
+uart:
+  - id: hp_uart
+    baud_rate: 2400 # For some equipment this may need to be 9600
+    parity: EVEN
+    rx_pin:
+      number: GPIO7
+    tx_pin:
+      number: GPIO6
+  - id: tstat_uart
+    baud_rate: 2400 # For some equipment this may need to be 9600
+    parity: EVEN
+    rx_pin:
+      number: GPIO20
+    tx_pin:
+      number: GPIO21
