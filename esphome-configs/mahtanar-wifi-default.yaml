@@ -1,0 +1,35 @@
+substitutions:
+  name: "muart-heat-pump"
+  friendly_name: "mUART Heat Pump"
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+logger:
+  # Serial logging disabled to support communication with thermostat.  Can be reenabled by disabling tstat_uart below.
+  baud_rate: 0 
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+wifi:
+  # Enable captive portal for provisioning
+  ap:
+    ssid: "mUART Setup"
+    password: "mahtanar"
+
+captive_portal:
+
+# Sets up Bluetooth LE (Only on ESP32) to allow the user
+# to provision wifi credentials to the device.
+esp32_improv:
+  authorizer: none
