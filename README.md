@@ -15,7 +15,7 @@ While *in theory* it's possible to connect the Mahtanar board to your heat pump 
 
 #### Prerequisites:
 
-- Mahtanar board (WiFi or Ethernet models)
+- Mahtanar board (WiFi or Ethernet model)
 - CN105 connector cable
 - ESPHome installed and running on your network
 - Home Assistant configured with ESPHome integration
@@ -25,14 +25,14 @@ While *in theory* it's possible to connect the Mahtanar board to your heat pump 
 1. Connect the Mahtanar to a USB power source (ideally your computer for additional serial troubleshooting if needed).
 2. If you have the WiFi version of the board, use your computer or mobile device to connect to the `mUART Setup` WiFI SSID with `mahtanar` as the password.  You should be prompted to connect the device to your WiFi network; do so.
 If you have the ethernet version of the board, just connect it to your network.
-3. After a moment, the device should show up on your ESPHome dashboard as `muart-heat-pump-MACSUFFIX` with an "Adopt" option.  Press "Adopt" provide a friendly name, and copy the encryption key for later.  When prompted, press "Install".
+3. After a moment, the device should show up on your ESPHome dashboard as `muart-heat-pump-MACSUFFIX` with an "Adopt" option.  Press "Adopt", provide a friendly name, and copy the encryption key for later.  When prompted, press "Install".
 4. Home Assistant should have discovered the device and will show it with the friendly name you provided.  Adding this device to Home Assistant will require the encryption key you copied in step 3.
-5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the plug with a fan icon on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
+5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the port with a fan icon on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
 6. More information on configuring the ESPHome `mitsubishi_uart` component is [available here](https://muart-group.github.io/).  The ESPHome configuration should be available for modification on your ESPHome dashboard.
 
 #### Troubleshooting
 
-Frequent troubleshooting tips will be added here, but as a last resort, the [ESPHome configuration file](https://github.com/tinwer-group/mahtanar/blob/main/esphome-configs/mahtanar-wifi-default.yaml) can be used to reset the device to factory settings, or as a starting point for a manual configuration that can be installed directly from the ESPHome dashboard
+Frequent troubleshooting tips will be added here, but as a last resort, [this ESPHome configuration file](https://github.com/tinwer-group/mahtanar/blob/main/esphome-configs/mahtanar-wifi-default.yaml) can be used to reset the device to factory settings, or as a starting point for a manual configuration that can be installed directly from the ESPHome dashboard
 
 ## Connecting to Equipment
 
