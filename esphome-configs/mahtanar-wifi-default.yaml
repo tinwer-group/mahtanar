@@ -24,7 +24,7 @@ external_components:
 # This should point to the public location of this yaml file.
 dashboard_import:
   package_import_url: github://tinwer-group/mahtanar/esphome-configs/mahtanar-wifi-default.yaml@1.0-release
-  import_full_config: false # or true
+  import_full_config: true
 
 logger:
   # Serial logging disabled to support communication with thermostat.  Can be reenabled by disabling tstat_uart below.
@@ -35,7 +35,7 @@ api:
 
 ota:
 
- # Enable WiFi and captive portal for provisioning
+# Enable WiFi and captive portal for provisioning
 wifi:
   ap:
     ssid: "mUART Setup"
