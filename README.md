@@ -1,6 +1,9 @@
 # Mahtanar
 ### A hardware controller for Mitsubishi heat pumps using CN105 connector.
 
+<img src="https://github.com/user-attachments/assets/6ce37ea4-a2a8-421e-a000-fe889be8c505" height="180"/>
+<img src="https://github.com/user-attachments/assets/b1f2440f-674b-4b0e-aa93-91b00f111d58" height="180"/>
+
 # ⚠️
 
 ❗This project is **not** affiliated in any way with Mitsubishi.  The hardware and software provided here are as-is, with all faults; and include no warranties express or implied.  Following the procedures herein may void the warranty of your equipment and pose a risk of injury; proceed at your own risk!❗
@@ -11,7 +14,7 @@
 
 ## Getting Started
 
-While *in theory* it's possible to connect the Mahtanar board to your heat pump equipment and *then* provision it, this can make troubleshooting more difficult so it's recommended that at least for your first device you provision it while it's connected just over USB and connect it to your heat pump after it's all set up.
+While *in theory* it's possible to connect the Mahtanar board to your heat pump equipment and *then* provision it, this can make troubleshooting more difficult so it's recommended that at least for your first device you provision it while it's connected/powered over USB and connect it to your heat pump after it's all set up.
 
 #### Prerequisites:
 
@@ -23,12 +26,12 @@ While *in theory* it's possible to connect the Mahtanar board to your heat pump 
 #### Setup
 
 1. Connect the Mahtanar to a USB power source (ideally your computer for additional serial troubleshooting if needed).
-2. If you have the WiFi version of the board, use your computer or mobile device to connect to the `mUART Setup` WiFI SSID with `mahtanar` as the password.  You should be prompted to connect the device to your WiFi network; do so.
+2. If you have the WiFi version of the board, use your computer or mobile device to connect to the `mITP Setup` WiFI SSID with `mahtanar` as the password.  You should be prompted to connect the device to your WiFi network; do so.
 If you have the ethernet version of the board, just connect it to your network.
-3. After a moment, the device should show up on your ESPHome dashboard as `muart-heat-pump-MACSUFFIX` with an "Adopt" option.  Press "Adopt", provide a friendly name, and copy the encryption key for later.  When prompted, press "Install".
+3. After a moment, the device should show up on your ESPHome dashboard as `mitp-heat-pump-MACSUFFIX` with an "Adopt" option.  Press "Adopt", provide a friendly name, and copy the encryption key for later.  When prompted, press "Install".
 4. Home Assistant should have discovered the device and will show it with the friendly name you provided.  Adding this device to Home Assistant will require the encryption key you copied in step 3.
-5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the port with a fan icon on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
-6. More information on configuring the ESPHome `mitsubishi_uart` component is [available here](https://muart-group.github.io/).  The ESPHome configuration should be available for modification on your ESPHome dashboard.
+5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the port labeled `HP1` on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
+6. More information on configuring the ESPHome `mitsubishi_itp` component is [available here](https://muart-group.github.io/).  The ESPHome configuration should be available for modification on your ESPHome dashboard.
 
 #### Troubleshooting
 
@@ -40,4 +43,4 @@ More details to be added here, though some detailed tutorials can be found onlin
 
 #### MHK2
 
-The `mitsubishi_uart` component also supports MHK2 thermostats which can be connected to the other port (with the thermometer icon) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
+The `mitsubishi_itp` component also supports MHK2 thermostats which can be connected to the other port (labeled `TS1`) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
