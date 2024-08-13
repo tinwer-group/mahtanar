@@ -4,11 +4,13 @@
 <img src="https://github.com/user-attachments/assets/6ce37ea4-a2a8-421e-a000-fe889be8c505" height="180"/>
 <img src="https://github.com/user-attachments/assets/b1f2440f-674b-4b0e-aa93-91b00f111d58" height="180"/>
 
+Available for purchase at the [Tinwer Etsy Shop](https://www.etsy.com/listing/1762258422/mahtanar-heat-pump-controller)
+
 # ⚠️
 
 ❗This project is **not** affiliated in any way with Mitsubishi.  The hardware and software provided here are as-is, with all faults; and include no warranties express or implied.  Following the procedures herein may void the warranty of your equipment and pose a risk of injury; proceed at your own risk!❗
 
-... that said we we're doing our best to make sure things work and to help you through the process.
+... that said we're doing our best to make sure things work and to help you through the process.  Please feel free to create an issue here if you run into any trouble.
 
 ----
 
@@ -35,7 +37,10 @@ If you have the ethernet version of the board, just connect it to your network.
 
 #### Troubleshooting
 
-Frequent troubleshooting tips will be added here, but as a last resort, [this ESPHome configuration file](https://github.com/tinwer-group/mahtanar/blob/main/esphome-configs/mahtanar-wifi-default.yaml) can be used to reset the device to factory settings, or as a starting point for a manual configuration that can be installed directly from the ESPHome dashboard
+Frequent troubleshooting tips will be added here, but a common step will likely be to use the configuration files listed below to reset the device back to its factory defaults (or as a starting point for a manual configuration) from the ESPHome dashboard:
+
+- [WiFi v1.1](https://raw.githubusercontent.com/tinwer-group/mahtanar/1.1-release/esphome-configs/mahtanar-wifi-default.yaml)
+- [Ethernet v1.1](https://raw.githubusercontent.com/tinwer-group/mahtanar/1.1-release/esphome-configs/mahtanar-ethernet-default.yaml)
 
 ## Connecting to Equipment
 
