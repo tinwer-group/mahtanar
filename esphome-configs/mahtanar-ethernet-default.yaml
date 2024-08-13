@@ -48,13 +48,6 @@ ethernet:
   interrupt_pin: GPIO03
   clock_speed: 25MHz
 
-# Define mitsubishi_itp climate component
-climate:
-  - platform: mitsubishi_itp
-    uart_heatpump: hp_uart
-    uart_thermostat: tstat_uart # This and the uart component below can be removed if no thermostat connected
-    update_interval: 6s # This should be a relatively safe default, but can be adjusted if desired
-
 # Define UARTs connected to heat pump and thermostat
 uart:
   - id: hp_uart
@@ -71,3 +64,76 @@ uart:
       number: GPIO20
     tx_pin:
       number: GPIO21
+
+# Define mitsubishi_itp climate component
+climate:
+  - platform: mitsubishi_itp
+    name: "Climate"
+    uart_heatpump: hp_uart
+    uart_thermostat: tstat_uart # This and the uart component below can be removed if no thermostat connected
+    update_interval: 6s # This should be a relatively safe default, but can be adjusted if desired
+
+# This default configuration includes all the common sensors, but these can each be commented out if your 
+# equipment doesn't support them or they are not needed.
+
+binary_sensor:
+  - platform: mitsubishi_itp
+    defrost:
+      # Reports if system is in defrost
+      name: "Defost"
+    filter_status:
+      # Reports if filter needs to be replaced (false = OK)
+      name: "Filter Status"
+    isee_status:
+      # Reports if i-see is enabled
+      name: "i-see Status"
+    preheat:
+      # Reports if system is preheating
+      name: "Preheat"
+    standby:
+      # Reports if system is in standby
+      name: "Standby"
+
+sensor:
+  - platform: mitsubishi_itp
+    compressor_frequency:
+      # Frequency in Hz of compressor (only some equipment)
+      name: "Compressor Frequency"
+    outdoor_temperature:
+      # Outdoor temperature as reported by equipment
+      name: "Outdoor Temperature"
+
+    # Only available if a thermostat is connected
+    thermostat_temperature:
+      # Temperature reported by thermostat
+      name: "Thermostat Temperature"
+
+text_sensor:
+  - platform: mitsubishi_itp
+    actual_fan:
+      # Actual current fan speed (vs. set speed)
+      name: "Actual Fan"
+    error_code:
+      # Reports diagnostic error code
+      name: "Error Code"
+
+button:
+  - platform: mitsubishi_itp
+    filter_reset_button:
+      # Resets the change-filter warning when pressed
+      name: "Filter Reset"
+
+select:
+  - platform: mitsubishi_itp
+    vane_position:
+      # Contols vertical vanes on supported units
+      name: "Vane Position"
+    horizontal_vane_position:
+      # Contols horizontal vanes on supported units
+      name: "H. Vane Position"
+    temperature_source:
+      # A list of additional temperature source sensors.  Included in this default
+      # config so that Thermostat can be selected if configured.
+      name: "Temperature Source"
+      sources: []
+      
