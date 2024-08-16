@@ -49,3 +49,47 @@ More details to be added here, though some detailed tutorials can be found onlin
 #### MHK2
 
 The `mitsubishi_itp` component also supports MHK2 thermostats which can be connected to the other port (labeled `TS1`) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
+
+## FAQ
+
+<details>
+  <summary>What if I don't have an MHK2?</summary>
+  The board will still work fine without an MHK2; just connect only the `HP1` port to your equipment and leave the `TS1` port empty.
+
+  If you don't plan on using a thermostat, the thermostat features can be disabled in the configuration streamline your experience.
+
+  Comment or remove `uart_thermostat` to disable the feature:
+  ``` yaml
+  climate:
+    - platform: mitsubishi_itp
+      name: "Climate"
+      uart_heatpump: hp_uart
+      # uart_thermostat: tstat_uart # This and the uart component below can be removed if no thermostat connected
+  ```
+
+  Additionally, you may want to remove the `uart` component to free up pins or allow for USB logging:
+  ``` yaml
+  uart:
+    - id: hp_uart
+      baud_rate: 2400 # For some equipment this may need to be 9600
+      parity: EVEN
+      rx_pin:
+        number: GPIO7
+      tx_pin:
+        number: GPIO6
+    # - id: tstat_uart
+    #   baud_rate: 2400 # For some equipment this may need to be 9600
+    #   parity: EVEN
+    #   rx_pin:
+    #     number: GPIO20
+    #   tx_pin:
+    #     number: GPIO21
+  ```
+
+  Logging can then be reenabled if desired:
+  ```yaml
+  logger:
+    # baud_rate: 0
+    baud_rate: 115200
+  ```
+</details>
