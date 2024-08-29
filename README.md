@@ -28,7 +28,7 @@ While *in theory* it's possible to connect the Mahtanar board to your heat pump 
 #### Setup
 
 1. Connect the Mahtanar to a USB power source (ideally your computer for additional serial troubleshooting if needed).
-2. If you have the WiFi version of the board, use your computer or mobile device to connect to the `mITP Setup` WiFI SSID with `mahtanar` as the password.  You should be prompted to connect the device to your WiFi network; do so.
+2. If you have the WiFi version of the board, use your computer or mobile device to connect to the `mITP Setup` WiFi SSID with `mahtanar` as the password.  You should be prompted to connect the device to your WiFi network; do so.  If your device doesn't prompt you, open a browser to http://192.168.4.1 to connect to the ESPHome Wifi setup page.
 If you have the ethernet version of the board, just connect it to your network.
 3. After a moment, the device should show up on your ESPHome dashboard as `mitp-heat-pump-MACSUFFIX` with an "Adopt" option.  Press "Adopt", provide a friendly name, and copy the encryption key for later.  When prompted, press "Install".
 4. Home Assistant should have discovered the device and will show it with the friendly name you provided.  Adding this device to Home Assistant will require the encryption key you copied in step 3.
