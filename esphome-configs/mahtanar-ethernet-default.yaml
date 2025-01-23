@@ -80,7 +80,7 @@ binary_sensor:
   - platform: mitsubishi_itp
     defrost:
       # Reports if system is in defrost
-      name: "Defost"
+      name: "Defrost"
     filter_status:
       # Reports if filter needs to be replaced (false = OK)
       name: "Filter Status"
