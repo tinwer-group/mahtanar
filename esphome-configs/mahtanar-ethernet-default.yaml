@@ -41,7 +41,7 @@ ota:
 ethernet:
   type: W5500
   mosi_pin: GPIO09
-  miso_pin: GPIO08
+  miso_pin: GPIO01
   clk_pin: GPIO10
   cs_pin: GPIO5
   reset_pin: GPIO04
