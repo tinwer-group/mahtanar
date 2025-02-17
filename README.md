@@ -93,3 +93,87 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
     baud_rate: 115200
   ```
 </details>
+
+## Additional Config
+<details>
+  <summary>Status LED</summary>
+  The built-in LED can be used to show current system status by adding the configuration snippets below.  The light can be turned on or off in Home Assistant and will remember its state, but brightness will need to be adjusted in the configuration.
+
+  Add the `light` and a `script` to update it:
+  ```yaml
+  light:
+    - platform: neopixelbus
+      variant: ws2812x
+      pin: GPIO08
+      num_leds: 1
+      id: status_led
+      name: "Status LED"
+      effects: 
+        - pulse:
+            name: "Standby"
+            min_brightness: 40%
+            max_brightness: 60%
+            transition_length: 1s
+            update_interval: 1s
+      restore_mode: RESTORE_DEFAULT_ON
+
+  script:
+    - id: update_status_led
+      parameters:
+        mode: int
+        action: int
+      then:
+        - lambda: |-
+            auto call = id(status_led).make_call();
+            switch (mode) {
+              case CLIMATE_MODE_OFF:
+                call.set_rgb(1,1,1);
+                break;
+              case CLIMATE_MODE_HEAT_COOL:
+                call.set_rgb(.8,0,1);
+                break;
+              case CLIMATE_MODE_COOL:
+                call.set_rgb(0,0.2,1);
+                break;
+              case CLIMATE_MODE_HEAT:
+                call.set_rgb(1,0.2,0);
+                break;
+              case CLIMATE_MODE_FAN_ONLY:
+                call.set_rgb(0,1,1);
+                break;
+              case CLIMATE_MODE_DRY:
+                call.set_rgb(1,1,0);
+                break;
+              default:
+                call.set_rgb(0,1,0);
+            }
+  
+            if (action == CLIMATE_ACTION_IDLE) {
+              call.set_effect("Standby");
+            } else {
+              call.set_effect("none").set_brightness(0.6);
+            }
+  
+            call.perform();
+  ```
+
+  Add an `on_boot` to show that the code is running, but heat pump is not-yet connected:
+  ```yaml
+  esphome:
+    ...
+    on_boot:
+      - then:
+          - lambda: |-
+              id(status_led).make_call().set_rgb(1,1,1).set_effect("Standby").perform();
+  ```
+
+  Add an `on_state` to the climate component to call the script above:
+  ```yaml
+  climate:
+  - platform: mitsubishi_itp
+    ...
+    on_state:
+    then:
+      - lambda: id(update_status_led)->execute(x.mode, x.action);
+  ```
+
