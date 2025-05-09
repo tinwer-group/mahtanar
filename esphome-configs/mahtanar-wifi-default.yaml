@@ -15,6 +15,7 @@ esp32:
   board: esp32-c3-devkitc-02
   framework:
     type: arduino
+    platform_version: platformio/espressif32 @ 6.10.0
 
 # Load the mitsubishi_itp component from this repo for now (hopefully eventually it will merged in ESPHome)
 external_components:
