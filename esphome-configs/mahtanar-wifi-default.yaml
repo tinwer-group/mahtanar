@@ -9,10 +9,10 @@ esphome:
 
   project:
     name: "tinwer.mahtanarm"
-    version: "1.2"
+    version: "1.3"
 
 esp32:
-  board: esp32-c3-devkitm-1
+  board: esp32-c3-devkitc-02
   framework:
     type: arduino
 
@@ -23,7 +23,7 @@ external_components:
 
 # This should point to the public location of this yaml file.
 dashboard_import:
-  package_import_url: github://tinwer-group/mahtanar/esphome-configs/mahtanar-wifi-default.yaml@1.2-release
+  package_import_url: github://tinwer-group/mahtanar/esphome-configs/mahtanar-wifi-default.yaml@1.3-release
   import_full_config: true
 
 logger:
@@ -51,9 +51,9 @@ uart:
     baud_rate: 2400 # For some equipment this may need to be 9600
     parity: EVEN
     rx_pin:
-      number: GPIO7
+      number: GPIO1
     tx_pin:
-      number: GPIO6
+      number: GPIO0
   - id: tstat_uart
     baud_rate: 2400 # For some equipment this may need to be 9600
     parity: EVEN
