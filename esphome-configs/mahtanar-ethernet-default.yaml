@@ -55,9 +55,9 @@ uart:
     baud_rate: 2400 # For some equipment this may need to be 9600
     parity: EVEN
     rx_pin:
-      number: GPIO7
+      number: GPIO1
     tx_pin:
-      number: GPIO6
+      number: GPIO0
   - id: tstat_uart
     baud_rate: 2400 # For some equipment this may need to be 9600
     parity: EVEN
