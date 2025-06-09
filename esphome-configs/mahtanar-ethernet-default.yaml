@@ -19,7 +19,7 @@ esp32:
 
 # Load the mitsubishi_itp component from this repo for now (hopefully eventually it will merged in ESPHome)
 external_components:
-  - source: github://muart-group/esphome@dev
+  - source: github://muart-group/esphome-components@main
     components: [ mitsubishi_itp ]
 
 # This should point to the public location of this yaml file.
