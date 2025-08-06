@@ -93,3 +93,8 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
     baud_rate: 115200
   ```
 </details>
+
+<details>
+  <summary>How do I re-flash the board?</summary>
+  In this repository, choose the branch that matched the revision number printed on your PCB (e.g. `v1.3`). Copy either the Ethernet or WiFi configuration from this repository into your ESPHome dashboard and install. If you have previously configured the WiFi, in most circumstances you will not need to reconfigure it.
+</details>
