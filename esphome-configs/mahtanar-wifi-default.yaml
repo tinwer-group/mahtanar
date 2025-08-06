@@ -14,10 +14,9 @@ esphome:
 esp32:
   board: esp32-c3-devkitc-02
   framework:
-    type: arduino
-    platform_version: platformio/espressif32 @ 6.10.0
+    type: esp-idf
 
-# Load the mitsubishi_itp component from this repo for now (hopefully eventually it will merged in ESPHome)
+# Load the mitsubishi_itp component from the repo
 external_components:
   - source: github://muart-group/esphome-components@main
     components: [ mitsubishi_itp ]
@@ -34,7 +33,7 @@ logger:
 # Enable Home Assistant / ESPHome API
 api:
 
-# Enable ota updates (no password here, but one will be generated during adoption)
+# Enable ota updates (no password here, but one should be generated during adoption)
 ota:
   platform: esphome
 
@@ -91,6 +90,9 @@ binary_sensor:
     standby:
       # Reports if system is in standby
       name: "Standby"
+    using_internal_temperature:
+      # Reports if system is using internal temperature sensor
+      name: "Internal Sensor"
 
 sensor:
   - platform: mitsubishi_itp
@@ -141,5 +143,6 @@ light:
     pin:
       number: GPIO08
       inverted: true
+      ignore_strapping_warning: true
     internal: true
       
