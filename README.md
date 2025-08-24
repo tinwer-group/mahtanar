@@ -84,13 +84,6 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
     #   tx_pin:
     #     number: GPIO21
   ```
-
-  Logging can then be reenabled if desired:
-  ```yaml
-  logger:
-    # baud_rate: 0
-    baud_rate: 115200
-  ```
 </details>
 
 <details>
