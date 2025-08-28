@@ -31,7 +31,7 @@ While *in theory* it's possible to connect the Mahtanar board to your heat pump 
 If you have the ethernet version of the board, just connect it to your network.
 3. After a moment, the device should show up on your ESPHome dashboard as `mitp-heat-pump-MACSUFFIX` with a "Take Control" option.  Press "Take Control", and provide a friendly name.  When prompted, press "Install".
 4. Home Assistant should have discovered the device and will show it with the friendly name you provided.
-5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the port labeled `Heatpump` on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
+5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the port labeled `Heatpump` (or `HP1`) on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
 6. More information on configuring the ESPHome `mitsubishi_itp` component is [available here](https://muart-group.github.io/).  The ESPHome configuration should be available for modification on your ESPHome dashboard.
 
 #### Troubleshooting
@@ -47,7 +47,7 @@ More details to be added here, though some detailed tutorials can be found onlin
 
 #### MHK2
 
-The `mitsubishi_itp` component also supports MHK2 thermostats which can be connected to the other port (labeled `Thermostat`) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
+The `mitsubishi_itp` component also supports MHK2 thermostats which can be connected to the other port (labeled `Thermostat` or `TS1`) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
 
 ## FAQ
 
@@ -73,9 +73,9 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
       baud_rate: 2400 # For some equipment this may need to be 9600
       parity: EVEN
       rx_pin:
-        number: GPIO7
+        number: GPIO1
       tx_pin:
-        number: GPIO6
+        number: GPIO0
     # - id: tstat_uart
     #   baud_rate: 2400 # For some equipment this may need to be 9600
     #   parity: EVEN
@@ -96,6 +96,108 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
 <details>
   <summary>How do I re-flash the board?</summary>
   In this repository, choose the branch that matched the revision number printed on your PCB (e.g. `v1.3`). Copy either the Ethernet or WiFi configuration from this repository into your ESPHome dashboard and install. If you have previously configured the WiFi, in most circumstances you will not need to reconfigure it.
+</details>
+
+## Additional Config
+<details>
+  <summary>Status LED (v1.2 ONLY)</summary>
+  The built-in LED can be used to show current system status by adding the configuration snippets below.  The light can be turned on or off in Home Assistant and will remember its state, but brightness will need to be adjusted in the configuration.
+
+  Add the `light` and a `script` to update it:
+  ```yaml
+  light:
+    - platform: neopixelbus
+      variant: ws2812x
+      pin: GPIO08
+      num_leds: 1
+      id: status_led
+      name: "Status LED"
+      effects: 
+        - pulse:
+            name: "Standby"
+            min_brightness: 40%
+            max_brightness: 60%
+            transition_length: 1s
+            update_interval: 1s
+      restore_mode: RESTORE_DEFAULT_ON
+
+  script:
+    - id: update_status_led
+      parameters:
+        mode: int
+        action: int
+      then:
+        - lambda: |-
+            auto call = id(status_led).make_call();
+            switch (mode) {
+              case CLIMATE_MODE_OFF:
+                call.set_rgb(1,1,1);
+                break;
+              case CLIMATE_MODE_HEAT_COOL:
+                call.set_rgb(.8,0,1);
+                break;
+              case CLIMATE_MODE_COOL:
+                call.set_rgb(0,0.2,1);
+                break;
+              case CLIMATE_MODE_HEAT:
+                call.set_rgb(1,0.2,0);
+                break;
+              case CLIMATE_MODE_FAN_ONLY:
+                call.set_rgb(0,1,1);
+                break;
+              case CLIMATE_MODE_DRY:
+                call.set_rgb(1,1,0);
+                break;
+              default:
+                call.set_rgb(0,1,0);
+            }
+  
+            if (action == CLIMATE_ACTION_IDLE) {
+              call.set_effect("Standby");
+            } else {
+              call.set_effect("none").set_brightness(0.6);
+            }
+  
+            call.perform();
+  ```
+
+  Add an `on_boot` to show that the code is running, but heat pump is not-yet connected:
+  ```yaml
+  esphome:
+    ...
+    on_boot:
+      - then:
+          - lambda: |-
+              id(status_led).make_call().set_rgb(1,1,1).set_effect("Standby").perform();
+  ```
+
+  Add an `on_state` to the climate component to call the script above:
+  ```yaml
+  climate:
+  - platform: mitsubishi_itp
+    ...
+    on_state:
+    then:
+      - lambda: id(update_status_led)->execute(x.mode, x.action);
+  ```
+</details>
+
+<details>
+  <summary>Status LED (v1.4 ONLY)</summary>
+  On revision v1.4, there are two LEDs: one to indicate the board has 3.3v power, and the other programmable. By default the programmable LED will use the ESPHome [Status LED](https://esphome.io/components/status_led/) platform to provide basic status:
+
+  ```yaml
+  light:
+  - platform: status_led
+    name: "Status LED"
+    pin:
+      number: GPIO08
+      inverted: true
+      ignore_strapping_warning: true
+    internal: true
+  ```
+
+  The programmable LED can be disabled by commenting out the configuration above, or used for other purposes (e.g. by removing `internal: true` the LED will appear as a light in Home Assistant).
 </details>
 
 ## Hardware Revisions
