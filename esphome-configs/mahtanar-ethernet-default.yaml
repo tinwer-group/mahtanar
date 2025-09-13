@@ -46,7 +46,7 @@ ethernet:
   cs_pin: GPIO5
   reset_pin: GPIO04
   interrupt_pin: GPIO03
-  clock_speed: 25MHz
+  clock_speed: 40MHz
 
 # Define UARTs connected to heat pump and thermostat
 uart:
