@@ -28,7 +28,7 @@ dashboard_import:
 
 logger:
   # Serial logging disabled to support communication with thermostat.  Can be reenabled by disabling tstat_uart below, and specifying baud_rate.
-  baud_rate: 0 
+  baud_rate: 115200 
 
 # Enable Home Assistant / ESPHome API
 api:
