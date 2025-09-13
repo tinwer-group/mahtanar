@@ -14,11 +14,11 @@ esphome:
 esp32:
   board: esp32-c3-devkitm-1
   framework:
-    type: arduino
+    type: esp-idf
 
 # Load the mitsubishi_itp component from this repo for now (hopefully eventually it will merged in ESPHome)
 external_components:
-  - source: github://muart-group/esphome@dev
+  - source: github://muart-group/esphome-components@main
     components: [ mitsubishi_itp ]
 
 # This should point to the public location of this yaml file.
@@ -28,7 +28,7 @@ dashboard_import:
 
 logger:
   # Serial logging disabled to support communication with thermostat.  Can be reenabled by disabling tstat_uart below, and specifying baud_rate.
-  baud_rate: 0 
+  baud_rate: 115200 
 
 # Enable Home Assistant / ESPHome API
 api:
@@ -90,6 +90,9 @@ binary_sensor:
     standby:
       # Reports if system is in standby
       name: "Standby"
+    using_internal_temperature:
+      # Reports if system is using internal temperature sensor
+      name: "Internal Sensor"
 
 sensor:
   - platform: mitsubishi_itp
