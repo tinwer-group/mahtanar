@@ -17,24 +17,29 @@ Available for purchase at the [Tinwer Etsy Shop](https://www.etsy.com/listing/17
 
 While *in theory* it's possible to connect the Mahtanar board to your heat pump equipment and *then* provision it, this can make troubleshooting more difficult so it's recommended that at least for your first device you provision it while it's connected/powered over USB and connect it to your heat pump after it's all set up.
 
-#### Prerequisites:
+### Prerequisites:
 
 - Mahtanar board (WiFi or Ethernet model)
 - CN105 connector cable
-- ESPHome installed and running on your network
+- (Semi-optional, see [note](#setup-note)) ESPHome installed and running on your network
 - Home Assistant configured with ESPHome integration
 
-#### Setup
+#### Setup Note
+ℹ️ The Mahtanar board comes pre-flashed with a default firmware, and can by used in Home Assistant without any ESPHome interaction. If you're fine with the defaults, you don't need to "Take Control" using ESPHome (and can always do so later if needed).
+
+### Setup
 
 1. Connect the Mahtanar to a USB power source (ideally your computer for additional serial troubleshooting if needed).
 2. If you have the WiFi version of the board, use your computer or mobile device to connect to the `mITP Setup` WiFi SSID with `mahtanar` as the password.  You should be prompted to connect the device to your WiFi network; do so.  If your device doesn't prompt you, open a browser to http://192.168.4.1 to connect to the ESPHome Wifi setup page.
 If you have the ethernet version of the board, just connect it to your network.
-3. After a moment, the device should show up on your ESPHome dashboard as `mitp-heat-pump-MACSUFFIX` with a "Take Control" option.  Press "Take Control", and provide a friendly name.  When prompted, press "Install".
+3. (Semi-optional, see [note](#setup-note)) After a moment, the device should show up on your ESPHome dashboard as `mitp-heat-pump-MACSUFFIX` with a "Take Control" option.  Press "Take Control", and provide a friendly name.  When prompted, press "Install".
 4. Home Assistant should have discovered the device and will show it with the friendly name you provided.
 5. Now that the device is provisioned, you can connect it to your heat pump using the CN105 connector cable and the port labeled `Heatpump` (or `HP1`) on the Mahtanar device.  Because power is provided by the equipment, a USB connection is no longer required unless troubleshooting.  This process can vary a bit depending on equipment, and more detailed information is provided below.
 6. More information on configuring the ESPHome `mitsubishi_itp` component is [available here](https://muart-group.github.io/).  The ESPHome configuration should be available for modification on your ESPHome dashboard.
 
-#### Troubleshooting
+
+
+### Troubleshooting
 
 Frequent troubleshooting tips will be added here, but a common step will likely be to use the configuration files listed below to reset the device back to its factory defaults (or as a starting point for a manual configuration) from the ESPHome dashboard:
 
@@ -45,7 +50,7 @@ Frequent troubleshooting tips will be added here, but a common step will likely 
 
 More details to be added here, though some detailed tutorials can be found online.  The gist of the process is that **WITH THE POWER DISCONNECTED FROM YOUR EQUIPMENT** (breaker off, or lockout switch engaged, depending), you will take the cover off of the wall unit, or panel off the air handler and locate the CN105 connector on the controller board.  The connector is usually red.  There should be some sort of knockout on the cover/panel near the controller board to route the cable outside of the unit.  The cover/panel can then be reinstalled and **THEN** the power turned back on.  You can then connect the other end of the cable to the Mahtanar.
 
-#### MHK2
+### MHK2
 
 The `mitsubishi_itp` component also supports MHK2 thermostats which can be connected to the other port (labeled `Thermostat` or `TS1`) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
 
