@@ -234,10 +234,10 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
 - Switched to hex buffer instead of bi-direcitonal levelshifter to work around issue with 499Ω resistor.
 - Added power and status LEDs.
 - Issue: Forgot to update version number on PCB silkscreen.
-- Issue: Learned that while wall-units have 5v pullup resistors on their CN105 ports, that some (most?) air handlers do not. This board design only included pullups for the TX lines, so it has issues receiving messages from air handlers. Solution is to manually install a 5v pullup resistor on the Heatpump TX line.
+- Issue: Learned that while wall-units have 5v pullup resistors on their CN105 ports, that some (most?) air handlers do not. This board design only included pullups for the Mahtanar->HP lines, so it has issues receiving messages from air handlers. Solution is to manually install a 5v pullup resistor on the HP->Mahtanar line.
 
 ### v1.4b
-- Added pullups to the UART RX lines for the heat pump and thermostat.
+- Added pullups to the HP->Mahtanar, and Thermostat->Mahtanar lines.
 - Fixed silkscreen to actually say `v1.4b`
 <img src="https://github.com/user-attachments/assets/e18f191f-88c1-42a3-9810-bfab0cf08eda" height="180"/>
 <img src="https://github.com/user-attachments/assets/e74af5bd-6042-4602-8a9c-39e734ce17b1" height="180"/>
