@@ -1,7 +1,8 @@
 # Mahtanar
 ### A hardware controller for Mitsubishi heat pumps using CN105 connector.
-<img src="https://github.com/user-attachments/assets/e18f191f-88c1-42a3-9810-bfab0cf08eda" height="180"/>
-<img src="https://github.com/user-attachments/assets/e74af5bd-6042-4602-8a9c-39e734ce17b1" height="180"/>
+<img src="https://github.com/user-attachments/assets/01e2992e-c7b9-4d10-be85-d5b3c83018b2" height="180"/>
+<img src="https://github.com/user-attachments/assets/86458336-06fa-4938-9e9f-9ac6550a7d26" height="180"/>
+
 
 Available for purchase at the [Tinwer Etsy Shop](https://www.etsy.com/listing/1762258422/mahtanar-heat-pump-controller)
 
@@ -209,4 +210,4 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
 
 ## Hardware Revisions
 
-See [PCB REVISIONS](blob/main/PCB-REVISIONS.md).
+See [PCB REVISIONS](PCB-REVISIONS.md).
