@@ -50,6 +50,8 @@ Frequent troubleshooting tips will be added here, but a common step will likely 
 
 More details to be added here, though some detailed tutorials can be found online.  The gist of the process is that **WITH THE POWER DISCONNECTED FROM YOUR EQUIPMENT** (breaker off, or lockout switch engaged, depending), you will take the cover off of the wall unit, or panel off the air handler and locate the CN105 connector on the controller board.  The connector is usually red.  There should be some sort of knockout on the cover/panel near the controller board to route the cable outside of the unit.  The cover/panel can then be reinstalled and **THEN** the power turned back on.  You can then connect the other end of the cable to the Mahtanar.
 
+For additional information about locating and connecting to the CN105 port, you may want to refer to the Mistubishi documentation for your equipment which will have instructions for installing e.g. the MHK2 RedLink adapter which is plugged into the same CN105 port.
+
 ### MHK2
 
 The `mitsubishi_itp` component also supports MHK2 thermostats which can be connected to the other port (labeled `Thermostat` or `TS1`) on the Mahtanar.  Once again, configuration details are available from [this project](https://muart-group.github.io/).
