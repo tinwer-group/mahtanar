@@ -4,7 +4,7 @@
 <img src="https://github.com/user-attachments/assets/86458336-06fa-4938-9e9f-9ac6550a7d26" height="180"/>
 
 
-Available for purchase at the [Tinwer Etsy Shop](https://www.etsy.com/listing/1762258422/mahtanar-heat-pump-controller)
+Available for purchase at the [Tinwer Etsy Shop](https://tinwer.etsy.com/listing/1762258422/mahtanar-heat-pump-controller)
 
 # ⚠️
 
