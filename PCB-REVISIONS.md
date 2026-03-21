@@ -44,3 +44,5 @@
 ### v1.4e
 - Modified BOM to use surface-mount PA connectors instead of through-hole to streamline production.
 - Modified BOM to use more available button switches (previous model was having availability issues).
+<img src="https://github.com/user-attachments/assets/01e2992e-c7b9-4d10-be85-d5b3c83018b2" height="180"/>
+<img src="https://github.com/user-attachments/assets/86458336-06fa-4938-9e9f-9ac6550a7d26" height="180"/>
