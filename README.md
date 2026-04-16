@@ -1,5 +1,5 @@
 # Mahtanar
-### A hardware controller for Mitsubishi heat pumps using CN105 connector.
+### A hardware controller for Mitsubishi (and Ecodan, see [FAQ](#faq)) heat pumps using CN105 connector.
 <img src="https://github.com/user-attachments/assets/01e2992e-c7b9-4d10-be85-d5b3c83018b2" height="180"/>
 <img src="https://github.com/user-attachments/assets/86458336-06fa-4938-9e9f-9ac6550a7d26" height="180"/>
 
@@ -104,6 +104,17 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
 <details>
   <summary>How do I re-flash the board?</summary>
   In this repository, choose the branch that matched the revision number printed on your PCB (e.g. `v1.3`). Copy either the Ethernet or WiFi configuration from this repository into your ESPHome dashboard and install. If you have previously configured the WiFi, in most circumstances you will not need to reconfigure it.
+</details>
+
+<details>
+  <summary>What about other firmware?</summary>
+
+  At time of writing, the MahtanarM ships with ESPHome using the [mITP Component library](https://github.com/muart-group/esphome-components) as it's stable (and made by the same author 😉). However since the board uses a standard ESP32-C3 it is possible to flash the board with other firmware options, including (but not limited to):
+  
+  - [https://github.com/echavet/MitsubishiCN105ESPHome](echavet/MitsubishiCN105ESPHome), a similar ESPHome library.
+  - The built-in [ESPHome Mitsubishi CN105 Climate](https://esphome.io/components/climate/mitsubishi_cn105/) component. As of 2026.4 this component is extremely bare-bones, but doesn't require external libraries.
+  - For Ecodan systems, [gekkekoe/esphome-ecodan-hp](https://github.com/gekkekoe/esphome-ecodan-hp) can be used (see [additional info here](https://github.com/tinwer-group/mahtanar/tree/1.4-release/esphome-ecodan-hp-configs)).
+
 </details>
 
 ## Additional Config
