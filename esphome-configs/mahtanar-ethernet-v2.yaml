@@ -1,0 +1,150 @@
+substitutions:
+  name: "mitp-heat-pump"
+  friendly_name: "mITP Heat Pump"
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  min_version: 2026.2.4
+
+  project:
+    name: "tinwer.mahtanarm"
+    version: "1.4"
+
+esp32:
+  board: esp32-c3-devkitc-02
+  framework:
+    type: esp-idf
+
+# Load the mitsubishi_itp component from the repo
+external_components:
+  - source: github://muart-group/esphome-components@v2
+    components: [ mitsubishi_itp ]
+
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: github://tinwer-group/mahtanar/esphome-configs/mahtanar-ethernet-v2.yaml@1.4-release
+  import_full_config: true
+
+logger:
+  baud_rate: 115200
+
+# Enable Home Assistant / ESPHome API
+api:
+
+# Enable ota updates (no password here, but one should be generated during adoption)
+ota:
+  platform: esphome
+
+# Enable Ethernet (no WiFi can be configured with Ethernet)
+ethernet:
+  type: W5500
+  mosi_pin: GPIO06
+  miso_pin: GPIO04
+  clk_pin: GPIO7
+  cs_pin: GPIO10
+  reset_pin: GPIO05
+  interrupt_pin: GPIO03
+  clock_speed: 40MHz
+
+# Define UARTs connected to heat pump and thermostat
+uart:
+  - id: hp_uart
+    baud_rate: 2400 # For some equipment this may need to be 9600
+    parity: EVEN
+    rx_pin:
+      number: GPIO1
+    tx_pin:
+      number: GPIO0
+  - id: tstat_uart
+    baud_rate: 2400 # For some equipment this may need to be 9600
+    parity: EVEN
+    rx_pin:
+      number: GPIO20
+    tx_pin:
+      number: GPIO21
+
+# Define mitsubishi_itp climate component
+climate:
+  - platform: mitsubishi_itp
+    name: "Climate"
+    uart_heatpump: hp_uart
+    uart_thermostat: tstat_uart # This and the uart component below can be removed if no thermostat connected
+    update_interval: 6s # This should be a relatively safe default, but can be adjusted if desired
+
+# This default configuration includes all the common sensors, but these can each be commented out if your 
+# equipment doesn't support them or they are not needed.
+
+binary_sensor:
+  - platform: mitsubishi_itp
+    defrost:
+      # Reports if system is in defrost
+      name: "Defrost"
+    filter_status:
+      # Reports if filter needs to be replaced (false = OK)
+      name: "Filter Status"
+    isee_status:
+      # Reports if i-see is enabled
+      name: "i-see Status"
+    preheat:
+      # Reports if system is preheating
+      name: "Preheat"
+    standby:
+      # Reports if system is in standby
+      name: "Standby"
+    using_internal_temperature:
+      # Reports if system is using internal temperature sensor
+      name: "Internal Sensor"
+
+sensor:
+  - platform: mitsubishi_itp
+    compressor_frequency:
+      # Frequency in Hz of compressor (only some equipment)
+      name: "Compressor Frequency"
+    outdoor_temperature:
+      # Outdoor temperature as reported by equipment
+      name: "Outdoor Temperature"
+
+    # Only available if a thermostat is connected
+    thermostat_temperature:
+      # Temperature reported by thermostat
+      name: "Thermostat Temperature"
+
+text_sensor:
+  - platform: mitsubishi_itp
+    actual_fan:
+      # Actual current fan speed (vs. set speed)
+      name: "Actual Fan"
+    error_code:
+      # Reports diagnostic error code
+      name: "Error Code"
+
+button:
+  - platform: mitsubishi_itp
+    filter_reset_button:
+      # Resets the change-filter warning when pressed
+      name: "Filter Reset"
+
+select:
+  - platform: mitsubishi_itp
+    vane_position:
+      # Contols vertical vanes on supported units
+      name: "Vane Position"
+    horizontal_vane_position:
+      # Contols horizontal vanes on supported units
+      name: "H. Vane Position"
+    temperature_source:
+      # A list of additional temperature source sensors.  Included in this default
+      # config so that Thermostat can be selected if configured.
+      name: "Temperature Source"
+      sources: []
+      
+light:
+  - platform: status_led
+    name: "Status LED"
+    pin:
+      number: GPIO08
+      inverted: true
+      ignore_strapping_warning: true
+    internal: true
