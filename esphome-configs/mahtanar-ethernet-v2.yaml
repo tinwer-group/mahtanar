@@ -37,6 +37,11 @@ api:
 ota:
   platform: esphome
 
+# Time is required for interaction with MHK2 (can be removed if no thermostat is present)
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
 # Enable Ethernet (no WiFi can be configured with Ethernet)
 ethernet:
   type: W5500
