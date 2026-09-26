@@ -219,6 +219,10 @@ The `mitsubishi_itp` component also supports MHK2 thermostats which can be conne
   The programmable LED can be disabled by commenting out the configuration above, or used for other purposes (e.g. by removing `internal: true` the LED will appear as a light in Home Assistant).
 </details>
 
+## Pinout
+The MahtanarM board follows the normal CN105 pinout conventions, for reference:
+<img width="564" height="285" alt="567202464-01e2992e-c7b9-4d10-be85-d5b3c83018b2" src="https://github.com/user-attachments/assets/12db8f8d-a4b0-4414-b220-d225fbf29bc1" />
+
 ## Hardware Revisions
 
 See [PCB REVISIONS](PCB-REVISIONS.md).
