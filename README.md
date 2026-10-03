@@ -3,8 +3,13 @@
 <img src="https://github.com/user-attachments/assets/01e2992e-c7b9-4d10-be85-d5b3c83018b2" height="180"/>
 <img src="https://github.com/user-attachments/assets/86458336-06fa-4938-9e9f-9ac6550a7d26" height="180"/>
 
+<br/>
+<br/>
 
-Available for purchase at the [Tinwer Etsy Shop](https://etsy.tinwer.shop/listing/1762258422/mahtanar-heat-pump-controller)
+Now available for purchase in the ✨new✨ [Tinwer Shop](https://tinwer.shop/pages/mahtanar-collection)!
+<br/>
+
+(For now, also available for purchase at the [Tinwer Etsy Shop](https://etsy.tinwer.shop/listing/1762258422/mahtanar-heat-pump-controller). I apologize in advance for any confusion while I work on switching web stores-- Etsy was having trouble shipping to Canadian customers, so I'm working on something more reliable. Inventory might not be perfectly in sync but I'll try not to *over*stock so all order should get fulfilled.)
 
 # ⚠️
 
