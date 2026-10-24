@@ -99,17 +99,28 @@ binary_sensor:
 
 sensor:
   - platform: mitsubishi_itp
+    # Frequency in Hz of compressor (only some equipment)
     compressor_frequency:
-      # Frequency in Hz of compressor (only some equipment)
       name: "Compressor Frequency"
+    # Outdoor temperature as reported by equipment
     outdoor_temperature:
-      # Outdoor temperature as reported by equipment
       name: "Outdoor Temperature"
+    # Current input watts (only some equipment)
+    input_watts:
+      name: "Input Watts"
+    # Lifetime kWh (only some equipment)
+    lifetime_kwh:
+      name: "Lifetime kWh"
+    # Lifetime runtime minutes (only some equipment)
+    runtime:
+      name: "Runtime"
 
-    # Only available if a thermostat is connected
+    # Temperature reported by thermostat (only available if a thermostat is connected)
     thermostat_temperature:
-      # Temperature reported by thermostat
       name: "Thermostat Temperature"
+    # Humidity reported by thermostat (uncomment only with enhanced_mhk)
+    # thermostat_humidity:
+    #   name: "Thermostat Humidity"
 
 text_sensor:
   - platform: mitsubishi_itp
